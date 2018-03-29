@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# xfconf-query -c <channel> -lv
+# xfconf-query -c <channel> -p <property> -s <value>
+
+## Settings for channel: xsettings
+xfconf-query -c xsettings -p /Net/ThemeName -s 'Arc'
+xfconf-query -c xsettings -p /Net/IconThemeName -s 'Numix-Circle'
+xfconf-query -c xsettings -p /Gtk/FontName -s 'Roboto 10'
+
+## Settings for channel: xfce4-panel
+xfconf-query -c xfce4-panel -p /panels/panel-0/position -s 'p=8;x=0;y=0'
+xfconf-query -c xfce4-panel -p /panels/panel-0/size -s '34'
+xfconf-query -c xfce4-panel -p /panels/panel-0/background-alpha -s '60'
+xfconf-query -c xfce4-panel -p /panels/panel-0/position -s 'p=8;x=0;y=0'
+#xfconf-query -c xfce4-panel -p /plugins/plugin-8/digital-format -s ''
+
+## Settings for channel: xfwm3
+xfconf-query -c xfwm4 -p /general/theme -s 'Arc'
+xfconf-query -c xfwm4 -p /general/title_font -s 'Roboto bold 9'
+xfconf-query -c xfwm4 -p /general/borderless_maximize -s 'false'
+
+## Settings for channel: xfce4-desktop
+#xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s '/opt/desktop-minimal/wallpaper.png'

@@ -1,0 +1,21 @@
+---
+  # Title: ansible-role-desktop-minimal
+  #
+  # Author: Luc Rutten
+  # Version: 1.0
+  # File: defaults/main.yml
+  #
+  # Description:
+  #   Providing a standerdized desktop environment based on xubuntu
+
+
+  ## Log out Menu ##
+  #
+  # http://docs.xfce.org/xfce/xfce4-session/advanced#kiosk_mode
+
+  xfce_session_customize_splash        : NONE
+  xfce_session_customize_chooser       : NONE
+  xfce_session_customize_logout        : ALL
+  xfce_session_customize_compatibility : NONE
+  xfce_session_shutdown                : ALL
+  xfce_session_customize_security      : NONE

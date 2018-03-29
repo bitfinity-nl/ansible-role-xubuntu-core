@@ -1,0 +1,60 @@
+---
+  # Title: ansible-role-desktop-minimal
+  #
+  # Author: Luc Rutten
+  # Version: 1.0
+  #
+  # Description:
+  #   Providing a standerdized minimal-desktop based on xubuntu
+
+  - name: "Add repository key arc-theme"
+    apt_key:
+      url: https://download.opensuse.org/repositories/home:Horst3180/xUbuntu_16.04/Release.key 
+      state: present
+
+  - name: "Add repositories"
+    apt_repository:
+      repo: "{{ item }}"
+      state: present
+      update_cache: yes
+    with_items:
+      - deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/ /
+      - ppa:numix/ppa
+
+  - name: "Update apt cache"
+    apt:
+      update_cache: yes
+
+  - name: "Install packages"
+    apt:
+      name: "{{ item }}"
+      update_cache: yes
+      force: yes
+      state: present
+    with_items:
+#     - xubuntu-core^
+      - arc-theme
+      - numix-icon-theme-circle
+      - fonts-roboto
+
+  - name: "Create directory /opt/desktop-minimal"
+    file:
+      path: /opt/desktop-minimal
+      state: directory
+
+  - name: "Copy template .j2 to /opt/desktop-minimal"
+    template:
+      src: desktop-minimal.sh.j2
+      dest: /opt/desktop-minimal/desktop-minimal.sh
+      mode: 0755 
+
+  - name: "Create directory /etc/xdg/xfce4/kiosk"
+    file:
+      path: /etc/xdg/xfce4/kiosk
+      state: directory
+
+  - name: "Copy template kioskrc.j2 to /etc/xdg/xfce4/kiosk/kioskrc"
+    template:
+      src: kioskrc.j2
+      dest: /etc/xdg/xfce4/kiosk/kioskrc
+    
