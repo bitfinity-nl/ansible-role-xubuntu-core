@@ -32,7 +32,7 @@
       force: yes
       state: present
     with_items:
-#     - xubuntu-core^
+#      - xubuntu-core^
       - arc-theme
       - numix-icon-theme-circle
       - fonts-roboto
@@ -72,6 +72,11 @@
     copy:
       src: desktop-minimal.desktop
       dest: /etc/xdg/autostart/desktop-minimal.desktop
+
+  - name: "Copy template terminalrc.j2 to /etc/xdg/xdg-ubuntu/xfce4/terminal/terminal.rc"
+    template:
+      src: terminalrc.j2
+      dest: /etc/xdg/xdg-xubuntu/xfce4/terminal/terminalrc
 
   - name: "Create directory /etc/xdg/xfce4/kiosk"
     file:
