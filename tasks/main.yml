@@ -37,16 +37,41 @@
       - numix-icon-theme-circle
       - fonts-roboto
 
-  - name: "Create directory /opt/desktop-minimal"
+  - name: "Create directory /opt/ansible-agent/"
     file:
-      path: /opt/desktop-minimal
+      path: /opt/ansible-agent
+      state: directory
+     
+  - name: "Create directory /opt/ansible-agent/scripts"
+    file:
+      path: /opt/ansible-agent/scripts
       state: directory
 
-  - name: "Copy template .j2 to /opt/desktop-minimal"
+  - name: "Create directory /opt/ansible-agent/images"
+    file:
+      path: /opt/ansible-agent/images
+      state: directory
+
+  - name: "Copy startmenu icon  ubuntu-black-start.png to /opt/ansible-agent/images/ubuntu-black-start.png"
+    copy:
+      src: ubuntu-black-start.png
+      dest: /opt/ansible-agent/images/ubuntu-black-start.png
+
+  - name: "Copy template desktop-minimal-lightdm.conf.j2 to /etc/lightdm/lightdm.conf.d/desktop-minimal-lightdm.conf"
+    template:
+      src: 50-desktop-minimal-lightdm.conf.j2
+      dest: /etc/lightdm/lightdm.conf.d/50-desktop-minimal-lightdm.conf
+
+  - name: "Copy template desktop-minimal.sh.j2 to /opt/ansible-agent/scripts/desktop-minimal.sh"
     template:
       src: desktop-minimal.sh.j2
-      dest: /opt/desktop-minimal/desktop-minimal.sh
+      dest: /opt/ansible-agent/scripts/desktop-minimal.sh
       mode: 0755 
+
+  - name: "Add desktop-minimal.sh script to global login script /etc/xdg/autostart/desktop-minimal.desktop"
+    copy:
+      src: desktop-minimal.desktop
+      dest: /etc/xdg/autostart/desktop-minimal.desktop
 
   - name: "Create directory /etc/xdg/xfce4/kiosk"
     file:
