@@ -39,7 +39,7 @@
   ## Settings for channel: xfce4-panel
   xfconf_xfce4panel_position         : p=8;x=0;y=0
   xfconf_xfce4panel_size             : 34
-  xfconf_xfce4panel_background_alpha : 60
+  xfconf_xfce4panel_background_alpha : 90
   xfconf_xfce4panel_8_digital_format : '%H:%M'
 
   ## Settings for channel: xfwm3
