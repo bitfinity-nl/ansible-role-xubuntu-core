@@ -21,4 +21,6 @@ xfconf-query -c xfwm4 -p /general/title_font -s '{{ xfconf_xfwm4_title_font }}'
 xfconf-query -c xfwm4 -p /general/borderless_maximize -s '{{ xfconf_xfwm4_borderless_maximize }}'
 
 ## Settings for channel: xfce4-desktop
-#xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s '{{ xfconf_xfce4desktop_image_path }}'
+xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s '{{ xfconf_xfce4desktop_image_path }}'
+xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s '{{ xfconf_xfce4desktop_image_path }}'
+xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor1/image-path -s '{{ xfconf_xfce4desktop_image_path }}'

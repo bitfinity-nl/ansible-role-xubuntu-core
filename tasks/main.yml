@@ -25,6 +25,9 @@
     apt:
       update_cache: yes
 
+  - name: "Install xubuntu-core"
+    shell: apt-get install -y xubuntu-core^
+
   - name: "Install packages"
     apt:
       name: "{{ item }}"
@@ -32,7 +35,6 @@
       force: yes
       state: present
     with_items:
-#      - xubuntu-core^
       - arc-theme
       - numix-icon-theme-circle
       - fonts-roboto
@@ -56,11 +58,19 @@
     copy:
       src: ubuntu-black-start.png
       dest: /opt/ansible-agent/images/ubuntu-black-start.png
+      mode: 0755
+
+  - name: "Copy startmenu icon wallpaper.jpg to /opt/ansible-agent/images/wallpaper.jpg"
+    copy:
+      src: "{{ xfconf_xfce4desktop_image_name }}"
+      dest: "{{ xfconf_xfce4desktop_image_path }}"
+      mode: 0755
 
   - name: "Copy template desktop-minimal-lightdm.conf.j2 to /etc/lightdm/lightdm.conf.d/desktop-minimal-lightdm.conf"
     template:
       src: 50-desktop-minimal-lightdm.conf.j2
       dest: /etc/lightdm/lightdm.conf.d/50-desktop-minimal-lightdm.conf
+      mode: 0755
 
   - name: "Copy template desktop-minimal.sh.j2 to /opt/ansible-agent/scripts/desktop-minimal.sh"
     template:

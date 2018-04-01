@@ -48,6 +48,7 @@
   xfconf_xfwm4_borderless_maximize   : false
 
   ## Settings for channel: xfce4-desktop
-  xfconf_xfce4desktop_image_path     : n.v.t.
+  xfconf_xfce4desktop_image_name     : wallpaper.png
+  xfconf_xfce4desktop_image_path     : /opt/ansible-agent/images/wallpaper.png
 
   
