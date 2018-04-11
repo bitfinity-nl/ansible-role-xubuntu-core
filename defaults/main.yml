@@ -49,7 +49,7 @@
 
   ## Settings for channel: xfce4-desktop (Put custom wallpaper in the files folder)
   xfconf_xfce4desktop_image_name      : wallpaper.png
-  xfconf_xfce4desktop_image_path      : /opt/ansible-agent/images/wallpaper.png
+  xfconf_xfce4desktop_image_path      : /opt/ansible/images/wallpaper.png
 
   xfconf_xfce4desktop_show_filesystem : false
   xfconf_xfce4desktop_show_home       : false
@@ -61,7 +61,7 @@
   #
   # 
   
-  lightdm_background                  : '/opt/ansible-agent/images/wallpaper.png'
+  lightdm_background                  : '/opt/ansible/images/wallpaper.png'
   lightdm_theme                       : 'Arc'
   lightdm_icon_theme_name             : 'Numix-Circle'
   lightdm_font_name                   : 'Roboto'
@@ -69,4 +69,4 @@
   ## Whisker menu ##
   #
 
-  whisker_button_icon                 : '/opt/ansible-agent/images/ubuntu-black-start.png'
+  whisker_button_icon                 : '/opt/ansible/images/ubuntu-black-start.png'

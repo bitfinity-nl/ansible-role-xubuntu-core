@@ -39,28 +39,28 @@
       - numix-icon-theme-circle
       - fonts-roboto
 
-  - name: "Create directory /opt/ansible-agent/"
+  - name: "Create directory /opt/ansible/"
     file:
-      path: /opt/ansible-agent
+      path: /opt/ansible
       state: directory
      
-  - name: "Create directory /opt/ansible-agent/scripts"
+  - name: "Create directory /opt/ansible/scripts"
     file:
-      path: /opt/ansible-agent/scripts
+      path: /opt/ansible/scripts
       state: directory
 
-  - name: "Create directory /opt/ansible-agent/images"
+  - name: "Create directory /opt/ansible/images"
     file:
-      path: /opt/ansible-agent/images
+      path: /opt/ansible/images
       state: directory
 
-  - name: "Copy startmenu icon  ubuntu-black-start.png to /opt/ansible-agent/images/ubuntu-black-start.png"
+  - name: "Copy startmenu icon  ubuntu-black-start.png to /opt/ansible/images/ubuntu-black-start.png"
     copy:
       src: ubuntu-black-start.png
-      dest: /opt/ansible-agent/images/ubuntu-black-start.png
+      dest: /opt/ansible/images/ubuntu-black-start.png
       mode: 0755
 
-  - name: "Copy startmenu icon wallpaper.png to /opt/ansible-agent/images/wallpaper.png"
+  - name: "Copy startmenu icon wallpaper.png to /opt/ansible/images/wallpaper.png"
     copy:
       src: "{{ xfconf_xfce4desktop_image_name }}"
       dest: "{{ xfconf_xfce4desktop_image_path }}"
@@ -84,16 +84,16 @@
       dest: /etc/xdg/xdg-xubuntu/xfce4/whiskermenu/defaults.rc
       mode: 0644
 
-  - name: "Copy template desktop-minimal.sh.j2 to /opt/ansible-agent/scripts/desktop-minimal.sh"
+  - name: "Copy template custom-desktop.sh.j2 to /opt/ansible/scripts/custom-desktop.sh"
     template:
-      src: desktop-minimal.sh.j2
-      dest: /opt/ansible-agent/scripts/desktop-minimal.sh
+      src: custom-desktop.sh.j2
+      dest: /opt/ansible/scripts/custom-desktop.sh
       mode: 0755 
 
-  - name: "Add desktop-minimal.sh script to global login script /etc/xdg/autostart/desktop-minimal.desktop"
+  - name: "Add custom-desktop.sh script to global login script /etc/xdg/autostart/custom-desktop.desktop"
     copy:
-      src: desktop-minimal.desktop
-      dest: /etc/xdg/autostart/desktop-minimal.desktop
+      src: custom-desktop.desktop
+      dest: /etc/xdg/autostart/custom-desktop.desktop
 
   - name: "Copy template terminalrc.j2 to /etc/xdg/xdg-ubuntu/xfce4/terminal/terminal.rc"
     template:
