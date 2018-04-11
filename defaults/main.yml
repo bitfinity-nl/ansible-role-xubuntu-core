@@ -32,23 +32,36 @@
   #
   
   ## Settings for channel: xsettings
-  xfconf_theme_name                  : Arc
-  xfconf_icon_theme_name             : Numix-Circle
-  xfconf_font_name                   : Roboto 10
+  xfconf_theme_name                   : Arc
+  xfconf_icon_theme_name              : Numix-Circle
+  xfconf_font_name                    : Roboto 10
  
   ## Settings for channel: xfce4-panel
-  xfconf_xfce4panel_position         : p=8;x=0;y=0
-  xfconf_xfce4panel_size             : 34
-  xfconf_xfce4panel_background_alpha : 90
-  xfconf_xfce4panel_8_digital_format : '%H:%M'
+  xfconf_xfce4panel_position          : p=8;x=0;y=0
+  xfconf_xfce4panel_size              : 34
+  xfconf_xfce4panel_background_alpha  : 90
+  xfconf_xfce4panel_8_digital_format  : '%H:%M'
 
   ## Settings for channel: xfwm3
-  xfconf_xfwm4_theme                 : Arc
-  xfconf_xfwm4_title_font            : Roboto bold 9
-  xfconf_xfwm4_borderless_maximize   : false
+  xfconf_xfwm4_theme                  : Arc
+  xfconf_xfwm4_title_font             : Roboto bold 9
+  xfconf_xfwm4_borderless_maximize    : false
 
-  ## Settings for channel: xfce4-desktop
-  xfconf_xfce4desktop_image_name     : wallpaper.png
-  xfconf_xfce4desktop_image_path     : /opt/ansible-agent/images/wallpaper.png
+  ## Settings for channel: xfce4-desktop (Put custom wallpaper in the files folder)
+  xfconf_xfce4desktop_image_name      : wallpaper.png
+  xfconf_xfce4desktop_image_path      : /opt/ansible-agent/images/wallpaper.png
 
+  xfconf_xfce4desktop_show_filesystem : false
+  xfconf_xfce4desktop_show_home       : false
+  xfconf_xfce4desktop_show_removable  : false
+  xfconf_xfce4desktop_show_trash      : false
+  xfconf_xfce4desktop_icon_size       : 49
+
+  ## LightDM Theming ##
+  #
+  # 
   
+  lightdm_background                  : '/opt/ansible-agent/images/wallpaper.png'
+  lightdm_theme                       : 'Arc'
+  lightdm_icon_theme_name             : 'Numix-Circle'
+  lightdm_font_name                   : 'Roboto'

@@ -18,9 +18,15 @@ xfconf-query -c xfce4-panel -p /plugins/plugin-8/digital-format -s '{{ xfconf_xf
 ## Settings for channel: xfwm3
 xfconf-query -c xfwm4 -p /general/theme -s '{{ xfconf_xfwm4_theme }}'
 xfconf-query -c xfwm4 -p /general/title_font -s '{{ xfconf_xfwm4_title_font }}'
-xfconf-query -c xfwm4 -p /general/borderless_maximize -s '{{ xfconf_xfwm4_borderless_maximize }}'
+xfconf-query -c xfwm4 -p /general/borderless_maximize -s '{{ xfconf_xfwm4_borderless_maximize | lower }}'
 
 ## Settings for channel: xfce4-desktop
 xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s '{{ xfconf_xfce4desktop_image_path }}'
 xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s '{{ xfconf_xfce4desktop_image_path }}'
 xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor1/image-path -s '{{ xfconf_xfce4desktop_image_path }}'
+
+xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-filesystem -s '{{ xfconf_xfce4desktop_show_filesystem | lower }}'
+xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home -s '{{ xfconf_xfce4desktop_show_home | lower }}'
+xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable -s '{{ xfconf_xfce4desktop_show_removable | lower }}'
+xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash -s '{{ xfconf_xfce4desktop_show_trash | lower }}'
+xfconf-query -c xfce4-desktop -p /desktop-icons/icon-size -s '{{ xfconf_xfce4desktop_icon_size | lower }}'

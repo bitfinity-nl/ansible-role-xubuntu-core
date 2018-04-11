@@ -60,10 +60,16 @@
       dest: /opt/ansible-agent/images/ubuntu-black-start.png
       mode: 0755
 
-  - name: "Copy startmenu icon wallpaper.jpg to /opt/ansible-agent/images/wallpaper.jpg"
+  - name: "Copy startmenu icon wallpaper.png to /opt/ansible-agent/images/wallpaper.png"
     copy:
       src: "{{ xfconf_xfce4desktop_image_name }}"
       dest: "{{ xfconf_xfce4desktop_image_path }}"
+      mode: 0755
+
+  - name: "Copy template lightdm-gtk-greeter.conf.j2 to /etc/lightdm/lightdm-gtk-greeter.conf"
+    template:
+      src: lightdm-gtk-greeter.conf.j2
+      dest: /etc/lightdm/lightdm-gtk-greeter.conf
       mode: 0755
 
   - name: "Copy template desktop-minimal-lightdm.conf.j2 to /etc/lightdm/lightdm.conf.d/desktop-minimal-lightdm.conf"
