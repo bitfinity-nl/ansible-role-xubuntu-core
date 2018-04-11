@@ -78,17 +78,17 @@
       dest: /etc/lightdm/lightdm.conf.d/50-desktop-minimal-lightdm.conf
       mode: 0755
 
-  - name: "Copy template whiskermenu-defaults.rc.j2 to /etc/xdg/xdg-xubuntu/xfce4/whiskermenu/defaults.rc"
-    template:
-      src: whiskermenu-defaults.rc.j2
-      dest: /etc/xdg/xdg-xubuntu/xfce4/whiskermenu/defaults.rc
-      mode: 0644
-
   - name: "Copy template desktop-minimal.sh.j2 to /opt/ansible-agent/scripts/desktop-minimal.sh"
     template:
       src: desktop-minimal.sh.j2
       dest: /opt/ansible-agent/scripts/desktop-minimal.sh
       mode: 0755 
+
+  - name: "Copy template whisker-defaults.rc.j2 to /opt/ansible-agent/scripts/desktop-minimal.sh"
+    template:
+      src: whiskermenu-defaults.rc.j2
+      dest: /etc/
+      mode:
 
   - name: "Add desktop-minimal.sh script to global login script /etc/xdg/autostart/desktop-minimal.desktop"
     copy:

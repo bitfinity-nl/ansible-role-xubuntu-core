@@ -14,7 +14,9 @@ xfconf-query -c xfce4-panel -p /panels/panel-0/size -s '{{ xfconf_xfce4panel_siz
 xfconf-query -c xfce4-panel -p /panels/panel-0/background-alpha -s '{{ xfconf_xfce4panel_background_alpha }}'
 xfconf-query -c xfce4-panel -p /panels/panel-0/position -s '{{ xfconf_xfce4panel_position }}'
 xfconf-query -c xfce4-panel -p /plugins/plugin-8/digital-format -s '{{ xfconf_xfce4panel_8_digital_format }}'
-cp -f /etc/xdg/xdg-xubuntu/xfce4/whiskermenu/defaults.rc ~/.config/xfce4/panel/whiskermenu-1.rc
+
+cp /etc/xdg/xdg-xubuntu/xfce4/whiskermenu/defaults.rc ~/.config/xfce4/panel/whiskermenu-1
+
 
 ## Settings for channel: xfwm3
 xfconf-query -c xfwm4 -p /general/theme -s '{{ xfconf_xfwm4_theme }}'
@@ -31,3 +33,4 @@ xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home -s '{{ xfco
 xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable -s '{{ xfconf_xfce4desktop_show_removable | lower }}'
 xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash -s '{{ xfconf_xfce4desktop_show_trash | lower }}'
 xfconf-query -c xfce4-desktop -p /desktop-icons/icon-size -s '{{ xfconf_xfce4desktop_icon_size | lower }}'
+
