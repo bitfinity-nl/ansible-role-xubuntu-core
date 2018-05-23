@@ -8,65 +8,79 @@
   # Description:
   #   Providing a standerdized desktop environment based on xubuntu
 
-  ## LightDM ##
+
+  # ---  LightDM ---
+  #
+  # Syntax:
+  #   ldm_autologin_status = present or absent        : Enable or disable autologin 
   #
   # https://wiki.ubuntu.com/LightDM#Show_Manual_Login_Box
   
-  ldm_allow_guest                      : false
-  ldm_greeter_hide_users               : true
+  # Theming
+  lightdm_background                   : '/opt/ansible/images/wallpaper.png'
+  lightdm_theme                        : 'Arc'
+  lightdm_icon_theme_name              : 'Numix-Circle'
+  lightdm_font_name                    : 'Roboto'
 
-  
-  ## Log out Menu ##
+  # Login settings
+  ldm_allow_guest                      : 'false'
+  ldm_greeter_hide_users               : 'true'
+
+  # Autologin
+  ldm_autologin_status                 : 'present'
+  ldm_autologin_user                   : 'autologin'
+  ldm_autologin_user_timeout           : '0' 
+
+
+
+  # ---  Log out Menu ---
   #
   # http://docs.xfce.org/xfce/xfce4-session/advanced#kiosk_mode
 
-  xfce_session_customize_splash        : NONE
-  xfce_session_customize_chooser       : NONE
-  xfce_session_customize_logout        : ALL
-  xfce_session_customize_compatibility : NONE
-  xfce_session_shutdown                : ALL
-  xfce_session_customize_security      : NONE
+  xfce_session_customize_splash        : 'NONE'
+  xfce_session_customize_chooser       : 'NONE'
+  xfce_session_customize_logout        : 'ALL'
+  xfce_session_customize_compatibility : 'NONE'
+  xfce_session_shutdown                : 'ALL'
+  xfce_session_customize_security      : 'NONE'
 
-  ## Desktop Theme ##
+
+
+  # --- Desktop Theme ---
   #
   #
   
   ## Settings for channel: xsettings
-  xfconf_theme_name                   : Arc
-  xfconf_icon_theme_name              : Numix-Circle
-  xfconf_font_name                    : Roboto 10
+  xfconf_theme_name                   : 'Arc'
+  xfconf_icon_theme_name              : 'Numix-Circle'
+  xfconf_font_name                    : 'Roboto 10'
  
   ## Settings for channel: xfce4-panel
-  xfconf_xfce4panel_position          : p=8;x=0;y=0
-  xfconf_xfce4panel_size              : 34
-  xfconf_xfce4panel_background_alpha  : 90
+  xfconf_xfce4panel_position          : 'p=8;x=0;y=0'
+  xfconf_xfce4panel_size              : '34'
+  xfconf_xfce4panel_background_alpha  : '90'
   xfconf_xfce4panel_8_digital_format  : '%H:%M'
 
   ## Settings for channel: xfwm3
-  xfconf_xfwm4_theme                  : Arc
-  xfconf_xfwm4_title_font             : Roboto bold 9
-  xfconf_xfwm4_borderless_maximize    : false
+  xfconf_xfwm4_theme                  : 'Arc'
+  xfconf_xfwm4_title_font             : 'Roboto bold 9'
+  xfconf_xfwm4_borderless_maximize    : 'false'
 
   ## Settings for channel: xfce4-desktop (Put custom wallpaper in the files folder)
-  xfconf_xfce4desktop_image_name      : wallpaper.png
-  xfconf_xfce4desktop_image_path      : /opt/ansible/images/wallpaper.png
+  xfconf_xfce4desktop_image_name      : 'wallpaper.png'
+  xfconf_xfce4desktop_image_path      : '/opt/ansible/images/wallpaper.png'
 
-  xfconf_xfce4desktop_show_filesystem : false
-  xfconf_xfce4desktop_show_home       : false
-  xfconf_xfce4desktop_show_removable  : false
-  xfconf_xfce4desktop_show_trash      : false
-  xfconf_xfce4desktop_icon_size       : 49
+  xfconf_xfce4desktop_show_filesystem : 'false'
+  xfconf_xfce4desktop_show_home       : 'false'
+  xfconf_xfce4desktop_show_removable  : 'false'
+  xfconf_xfce4desktop_show_trash      : 'false'
+  xfconf_xfce4desktop_icon_size       : '49'
 
-  ## LightDM Theming ##
-  #
-  # 
-  
-  lightdm_background                  : '/opt/ansible/images/wallpaper.png'
-  lightdm_theme                       : 'Arc'
-  lightdm_icon_theme_name             : 'Numix-Circle'
-  lightdm_font_name                   : 'Roboto'
 
-  ## Whisker menu ##
-  #
+
+  # --- Whisker menu ---
 
   whisker_button_icon                 : '/opt/ansible/images/ubuntu-black-start.png'
+
+
+  

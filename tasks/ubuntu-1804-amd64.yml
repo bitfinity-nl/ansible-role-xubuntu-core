@@ -1,0 +1,111 @@
+---
+  # Title: ansible-role-desktop-minimal
+  #
+  # Author: Luc Rutten
+  # Version: 1.1
+  # File: tasks/ubuntu-1804-amd64.yml
+  #
+  # Description:
+  #   Providing a standerdized minimal-desktop based on xubuntu
+
+  - name: "Add repositories"
+    apt_repository:
+      repo: "{{ item }}"
+      state: present
+      update_cache: yes
+    with_items:
+      - ppa:numix/ppa
+
+  - name: "Update apt cache"
+    apt:
+      update_cache: yes
+
+  - name: "Install xubuntu-core"
+    shell: apt-get install -y xubuntu-core^
+
+  - name: "Install packages"
+    apt:
+      name: "{{ item }}"
+      update_cache: yes
+      force: yes
+      state: present
+    with_items:
+      - arc-theme
+      - numix-icon-theme-circle
+      - fonts-roboto
+
+  - name: "Create directory /opt/ansible/"
+    file:
+      path: /opt/ansible
+      state: directory
+     
+  - name: "Create directory /opt/ansible/scripts"
+    file:
+      path: /opt/ansible/scripts
+      state: directory
+
+  - name: "Create directory /opt/ansible/images"
+    file:
+      path: /opt/ansible/images
+      state: directory
+
+  - name: "Copy startmenu icon  ubuntu-black-start.png to /opt/ansible/images/ubuntu-black-start.png"
+    copy:
+      src: ubuntu-black-start.png
+      dest: /opt/ansible/images/ubuntu-black-start.png
+      mode: 0755
+
+  - name: "Copy startmenu icon wallpaper.png to /opt/ansible/images/wallpaper.png"
+    copy:
+      src: "{{ xfconf_xfce4desktop_image_name }}"
+      dest: "{{ xfconf_xfce4desktop_image_path }}"
+      mode: 0755
+
+  - name: "Copy template lightdm-gtk-greeter.conf.j2 to /etc/lightdm/lightdm-gtk-greeter.conf"
+    template:
+      src: lightdm-gtk-greeter.conf.j2
+      dest: /etc/lightdm/lightdm-gtk-greeter.conf
+      mode: 0755
+
+  - name: "Copy template desktop-minimal-lightdm.conf.j2 to /etc/lightdm/lightdm.conf.d/desktop-minimal-lightdm.conf"
+    template:
+      src: 50-desktop-minimal-lightdm.conf.j2
+      dest: /etc/lightdm/lightdm.conf.d/50-desktop-minimal-lightdm.conf
+      mode: 0755
+
+  - name: "Copy template whiskermenu-defaults.rc.j2 to /etc/xdg/xdg-xubuntu/xfce4/whiskermenu/defaults.rc"
+    template:
+      src: whiskermenu-defaults.rc.j2
+      dest: /etc/xdg/xdg-xubuntu/xfce4/whiskermenu/defaults.rc
+      mode: 0644
+
+  - name: "Copy template custom-desktop.sh.j2 to /opt/ansible/scripts/custom-desktop.sh"
+    template:
+      src: custom-desktop.sh.j2
+      dest: /opt/ansible/scripts/custom-desktop.sh
+      mode: 0755 
+
+  - name: "Add custom-desktop.sh script to global login script /etc/xdg/autostart/custom-desktop.desktop"
+    copy:
+      src: custom-desktop.desktop
+      dest: /etc/xdg/autostart/custom-desktop.desktop
+
+  - name: "Copy template terminalrc.j2 to /etc/xdg/xdg-ubuntu/xfce4/terminal/terminal.rc"
+    template:
+      src: terminalrc.j2
+      dest: /etc/xdg/xdg-xubuntu/xfce4/terminal/terminalrc
+
+  - name: "Create directory /etc/xdg/xfce4/kiosk"
+    file:
+      path: /etc/xdg/xfce4/kiosk
+      state: directory
+
+  - name: "Copy template kioskrc.j2 to /etc/xdg/xfce4/kiosk/kioskrc"
+    template:
+      src: kioskrc.j2
+      dest: /etc/xdg/xfce4/kiosk/kioskrc
+    
+  - name: "For kioskmode (Autologin)"
+    import_tasks: xubuntu-core-autologin.yml 
+    when:
+      - ldm_autologin_status == "present"

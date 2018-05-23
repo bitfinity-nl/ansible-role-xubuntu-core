@@ -1,0 +1,18 @@
+galaxy_info:
+  author: L. Rutten
+  description: Customizable Xubuntu Core
+  company: Bitfinity-NL
+  license: MIT
+  min_ansible_version: 2.4
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+    - bionic
+  galaxy_tags:
+    - desktop
+    - xfce
+    - xubuntu
+    - ubuntu
+    - gui
+    - linux
