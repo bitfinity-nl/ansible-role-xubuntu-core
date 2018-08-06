@@ -114,5 +114,5 @@
   - name: "For kioskmode (Autologin)"
     import_tasks: xubuntu-core-autologin.yml 
     when:
-      - ldm_autologin_status == "present"
+      - ldm_autologin_status == "true"
 

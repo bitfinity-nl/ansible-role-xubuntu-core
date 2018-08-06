@@ -27,7 +27,10 @@
   ldm_greeter_hide_users               : 'true'
 
   # Autologin
-  ldm_autologin_status                 : 'present'
+  #
+  # ldm_autologin_status = true or false
+  #	
+  ldm_autologin_status                 : 'true'
   ldm_autologin_user                   : 'autologin'
   ldm_autologin_user_timeout           : '0' 
 
