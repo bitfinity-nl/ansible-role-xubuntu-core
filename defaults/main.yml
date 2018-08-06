@@ -8,6 +8,16 @@
   # Description:
   #   Providing a standerdized desktop environment based on xubuntu
 
+  # --- Plymouth ---
+  #
+  # Syntax
+  #  ply_splash_custom : 'present' or 'absent'
+  #  ply_splash_logo   : 'https://<url to your webserver>'   * must be png
+  #
+  # * Upload the wallpaper to a webserver
+  #
+  ply_splash_custom                    : 'present'
+  ply_splash_logo                      : 'http://172.16.2.20/resource/greenfoodos/greenlogo.png'
 
   # ---  LightDM ---
   #
@@ -28,12 +38,12 @@
 
   # Autologin
   #
-  # ldm_autologin_status = true or false
+  # Syntax:
+  #   ldm_autologin_status = present or absent
   #	
-  ldm_autologin_status                 : 'true'
+  ldm_autologin_status                 : 'absent'
   ldm_autologin_user                   : 'autologin'
   ldm_autologin_user_timeout           : '0' 
-
 
 
   # ---  Log out Menu ---

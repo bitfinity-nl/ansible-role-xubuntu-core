@@ -19,3 +19,8 @@
     when:
       - ansible_distribution_version == "18.04"
       - ansible_architecture == "x86_64"
+
+  - name: "Custom Plymouth splash logo"
+    import_tasks: xubuntu-core-splashscreen.yml
+    when:
+      - ply_splash_custom == 'present'
