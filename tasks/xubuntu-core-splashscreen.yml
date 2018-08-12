@@ -1,9 +1,9 @@
 ---
-  # Title: ansible-role-desktop-minimal
+  # Title: ansible-xubuntu-core
   #
-  # Author: Luc Rutten
+  # Author: Luc Rutten / David Weng
   # Version: 1.0
-  # File: tasks/ubuntu-1604-amd64.yml
+  # File: tasks/ubuntu-core-splashscreen.yml
   #
   # Description:
   #  configure greenos splashscreen
@@ -32,22 +32,32 @@
       group: administrator
       mode: 0754
 
-  - name: "configure xubuntu-core-splash logo (must be *.png)"
+  - name: "configure xubuntu-core-splash logo (url)"
     get_url:
-      url: "{{ ply_splash_logo }}"
+      url: "{{ xbc_splash_image_url }}"
       dest: /usr/share/plymouth/themes/xubuntu-core-splash/xubuntu-core-splash.png
       force: yes
-    #register: greensplash
+    when:
+      - xbc_splash_state == 'enabled' and xbc_splash_type == 'url' 
+    register: splash_url
+
+  - name: "configure xubuntu-core-splash logo (file)"
+    copy:
+      src: "{{ xbc_splash_image_file }}"
+      dest: /usr/share/plymouth/themes/xubuntu-core-splash/xubuntu-core-splash.png
+    when:
+      - xbc_splash_state == 'enabled' and xbc_splash_type == 'file'
+    register: splash_file
 
   - name: "configure greensplash screen"
     shell: update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/xubuntu-core-splash/xubuntu-core-splash.plymouth 100
-    #when: greensplash is changed
+    when: splash_url is changed or splash_file is changed
 
   - name: "creating a symbolic link for greensplash"
     shell: update-alternatives --set default.plymouth /usr/share/plymouth/themes/xubuntu-core-splash/xubuntu-core-splash.plymouth
-    #when: greensplash is changed
+    when: splash_url is changed or splash_file is changed
 
   - name: "update plymouth boot loader"
     shell: update-initramfs -u
-    #when: greensplash is changed
+    when: splash_url is changed or splash_file is changed
 

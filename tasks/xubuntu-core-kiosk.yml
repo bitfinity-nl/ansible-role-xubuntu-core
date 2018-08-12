@@ -1,0 +1,143 @@
+---
+  # Title: ansible-role-xubuntu-core
+  #
+  # Author: Luc Rutten
+  # Version: 1.0
+  # File: tasks/xubuntu-core-kiosk.yml
+  #
+  # Description:
+  #   Enable autologin for kiosk mode
+
+  - name: "Create autologin user"
+    user:
+      name: "{{ xbc_kiosk_user }}"
+      shell: /bin/bash
+      group: users
+      comment: user for autologon
+      state: present
+    when:
+      - xbc_kiosk_state == 'enabled'
+  
+  - name: "Remove autologin user"
+    user:
+      name: "{{ xbc_kiosk_user }}"
+      shell: /bin/bash
+      group: users
+      comment: user for autologon
+      state: "absent"
+    when:
+      - xbc_kiosk_state == 'disabled' 
+       
+  - name: "Copy template 60-autologin-lightdm.conf.j2 to /etc/lightdm/lightdm.conf.d/60-autologin-lightdm.conf"
+    template:
+      src: 60-autologin-lightdm.conf.j2
+      dest: /etc/lightdm/lightdm.conf.d/60-autologin-lightdm.conf
+      mode: 0755
+    when:
+      - xbc_kiosk_state == 'enabled'
+
+  - name: "Remove file if exists /etc/lightdm/lightdm.conf.d/60-autologin-lightdm.conf"
+    file:
+      path: /etc/lightdm/lightdm.conf.d/60-autologin-lightdm.conf
+      state: absent
+    when:
+      - xbc_kiosk_state == 'disabled'
+
+  - name: "Prepare directory for custom powermgmt for kiosk user {{ xbc_kiosk_user }}" 
+    file:
+      path: "/home/{{ xbc_kiosk_user }}/.config/xfce4/xfconf/xfce-perchannel-xml"
+      owner: "{{ xbc_kiosk_user }}"
+      group: users
+      mode: 0755
+      state: directory 
+
+  - name: "Disable powermanagement for kiosk user {{ xbc_kiosk_user }}"
+    template:
+      src: xfce4-power-manager.xml.j2
+      dest: "/home/{{ xbc_kiosk_user }}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml"
+      owner: root
+      group: administrator
+      mode: 0755
+    when:
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_pwr_mgmt_custom == 'enabled' 
+
+  - name: "Enable powermanagement for kiosk user {{ xbc_kiosk_user }}"
+    file:
+      path: "/home/{{ xbc_kiosk_user }}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml"
+      state: absent
+    when:
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_pwr_mgmt_custom == 'disabled' or
+        xbc_kiosk_state == 'disabled' and xbc_kiosk_pwr_mgmt_custom == 'disabled'
+
+  - name: "Disable all keyboards shortcut for kiosk user {{ xbc_kiosk_user }}."
+    template:
+      src: xfce4-keyboard-shortcuts.xml.j2
+      dest: /home/{{ xbc_kiosk_user }}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
+      owner: root
+      group: administrator
+      mode: 0755
+    when:
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_keyb_shortcuts == 'enabled'
+
+  - name: "Enable all keyboards shortcut for kiosk user {{ xbc_kiosk_user }}."
+    file:
+      path: /home/{{ xbc_kiosk_user }}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
+      state: absent
+    when:
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_keyb_shortcuts == 'disabled' or
+        xbc_kiosk_state == 'disabled' and xbc_kiosk_keyb_shortcuts == 'disabled'
+
+  - name: "Disable virtual TTY switching."
+    template:
+      src: xorg.conf.j2
+      dest: /etc/X11/xorg.conf
+      owner: root
+      group: administrator
+      mode: 0755
+    when:
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_tty_switch == 'enabled'
+
+  - name: "Enable TTY swiching."
+    file:
+      path: /etc/X11/xorg.conf
+      state: absent
+    when:
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_tty_switch == 'disabled' or
+        xbc_kiosk_state == 'disabled' and xbc_kiosk_tty_switch == 'disabled'
+
+  - name: "Block builtin xubuntu-core applist for allusers except administrators"
+    file:
+      path: "/usr/share/applications/{{ item }}"
+      owner: root
+      group: administrator      
+      mode: 0740
+    with_items: "{{ xbc_kiosk_applist_black }}"
+    when:
+      - xbc_kiosk_state == 'enabled'
+  
+  - name: "Set correct permissions on /usr/share/applications after blacklisting apps"
+    file:
+      path: "/usr/share/applications"
+      owner: root
+      group: root
+      mode: 0755
+    
+  - name: "Unblock builtin xubuntu-core applist for allusers" 
+    file:
+      path: "/usr/share/applications/{{ item }}"
+      mode: 0755
+      owner: root
+      group: root
+    with_items: "{{ xbc_kiosk_applist_white }}"
+    when:
+      - xbc_kiosk_state == 'enabled'
+
+  - name: "Unblock builtin xubuntu-core applist for allusers when kiosk mode is disabled"
+    file:
+      path: "/usr/share/applications/{{ item }}"
+      mode: 0755
+      owner: root
+      group: root
+    with_items: "{{ xbc_kiosk_applist_black }}"
+    when:
+      - xbc_kiosk_state == 'disabled'

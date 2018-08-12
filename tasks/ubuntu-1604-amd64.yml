@@ -112,7 +112,7 @@
       dest: /etc/xdg/xfce4/kiosk/kioskrc
     
   - name: "For kioskmode (Autologin)"
-    import_tasks: xubuntu-core-autologin.yml 
+    import_tasks: xubuntu-core-kiosk.yml 
     when:
       - ldm_autologin_status == "true"
 

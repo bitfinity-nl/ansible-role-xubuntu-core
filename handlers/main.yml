@@ -1,0 +1,11 @@
+---
+  # Title: ansible-role-xubuntu-core
+  #
+  # Author: Luc Rutten
+  # Version: 1.2
+  # File: handlers/main.yml
+  #
+  # Description:
+  #   Providing a standerdized minimal-desktop based on xubuntu
+
+    

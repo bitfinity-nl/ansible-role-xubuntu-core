@@ -20,7 +20,12 @@
       - ansible_distribution_version == "18.04"
       - ansible_architecture == "x86_64"
 
+  - name: "Import kioskmode template (Autologin)"
+    import_tasks: xubuntu-core-kiosk.yml
+    when:
+      - xbc_kiosk_state == "enabled"
+
   - name: "Custom Plymouth splash logo"
     import_tasks: xubuntu-core-splashscreen.yml
     when:
-      - ply_splash_custom == 'present'
+      - xbc_splash_state == 'enabled'

@@ -8,92 +8,245 @@
   # Description:
   #   Providing a standerdized desktop environment based on xubuntu
 
-  # --- Plymouth ---
-  #
-  # Syntax
-  #  ply_splash_custom : 'present' or 'absent'
-  #  ply_splash_logo   : 'https://<url to your webserver>'   * must be png
-  #
-  # * Upload the wallpaper to a webserver
-  #
-  ply_splash_custom                    : 'present'
-  ply_splash_logo                      : 'http://172.16.2.20/resource/greenfoodos/greenlogo.png'
-
-  # ---  LightDM ---
-  #
-  # Syntax:
-  #   ldm_autologin_status = present or absent        : Enable or disable autologin 
-  #
-  # https://wiki.ubuntu.com/LightDM#Show_Manual_Login_Box
-  
-  # Theming
-  lightdm_background                   : '/opt/ansible/images/wallpaper.png'
-  lightdm_theme                        : 'Arc'
-  lightdm_icon_theme_name              : 'Numix-Circle'
-  lightdm_font_name                    : 'Roboto'
-
-  # Login settings
-  ldm_allow_guest                      : 'false'
-  ldm_greeter_hide_users               : 'true'
-
-  # Autologin
-  #
-  # Syntax:
-  #   ldm_autologin_status = present or absent
-  #	
-  ldm_autologin_status                 : 'absent'
-  ldm_autologin_user                   : 'autologin'
-  ldm_autologin_user_timeout           : '0' 
 
 
-  # ---  Log out Menu ---
+  # -- Bootscreen --
   #
-  # http://docs.xfce.org/xfce/xfce4-session/advanced#kiosk_mode
-
-  xfce_session_customize_splash        : 'NONE'
-  xfce_session_customize_chooser       : 'NONE'
-  xfce_session_customize_logout        : 'ALL'
-  xfce_session_customize_compatibility : 'NONE'
-  xfce_session_shutdown                : 'ALL'
-  xfce_session_customize_security      : 'NONE'
-
-
-
-  # --- Desktop Theme ---
+  # Components:
+  #   Plymouth
   #
+  # Variables:
+  #   xbc_splash_state      : 'enabled' or 'disabled'                              # Wether run task or disable task.
+  #   xbc_splash_type       : 'url' or ''file'                                     # Specify the type and use "xbc_splash_image_url" or "xbc_splash_image_file"
+  #   xbc_splash_image_url  : 'https://<url to your webserver>'                    # URL were the image can be downloaded
+  #   xbc_splash_image_file : 'wallpaper.png'                                      # Path where the startbutton can be copied from (Default path: ansible-role-xubuntu-core/files)
   #
-  
-  ## Settings for channel: xsettings
-  xfconf_theme_name                   : 'Arc'
-  xfconf_icon_theme_name              : 'Numix-Circle'
-  xfconf_font_name                    : 'Roboto 10'
+  # Files:
+  #  - templates/xubuntu-core-splash.script.j2
+  #  - templates/xubuntu-core-splash.plymouth.j2
+  #  - files/wallpaper.png
+  #
+  # Information:
+  #  - Upload the wallpaper to a webserver
+  #
+  xbc_splash_state       : 'enabled'
+  xbc_splash_type        : 'file'
+  xbc_splash_image_url   : 'http://172.16.2.20/resource/greenfoodos/greenlogo.png'  
+  xbc_splash_image_file  : 'wallpaper.png' 
+
+
+  # -- Startbutton --
+  #
+  # Ccomponents:
+  #   whiskermenu 
+  #
+  # Variables:
+  #   xbc_startbutton_state : 'enabled' or 'disabled'                              # Wether run task or disable task.
+  #   xbc_startbutton_type  : 'url' or 'file'                                      # Where the startbuttn can be downloaded or copied from.
+  #   xbc_startbutton_url   : 'https://example.org/wallpaper.jpg'                  # Path where the startbutton can be downloaded.
+  #   xbc_startbutton_path  : 'wallpaper.png'                                      # Path where the startbutton can be copied from (Default path: ansible-role-xubuntu-core/files)
+  #   xbc_startbutton_name  : 'wallpaper.jpg'                                      # Name of the startbutton.
+  #
+  # Files:
+  #   files/ubuntu-black-start.png
+  #
+  # Information:
+  #   - The button Will be stored in the directory /opt/ansible/system/startbutton/images
+  #
+  xbc_startbutton_state   : 'enabled'
+  xbc_startbutton_type    : 'file'
+  xbc_startbutton_url     : ''
+  xbc_startbutton_file    : 'ubuntu-black-start.png'
+  xbc_startbutton_name    : 'ubuntu-black-start.png'
+
+
+  # -- Desktop  --
+  #
+  # Used packages:
+  #   xfce4   
+  #
+  # Variables:
+  #   xbc_desktop_state                     : 'enabled' or 'disabled'              # Wether run task or disable task.
+  #   xbc_desktop_type                      : 'url' or 'file'                      # Where the wallpaper can be downloaded or copied from.
+  #   xbc_desktop_url                       : 'https://example.org/wallpaper.jpg'  # Path where the wallpaper can be downloaded.
+  #   xbc_desktop_file                      : 'wallpaper.png'                      # Path where the wallpaper can be copied from (Default path: ansible-role-xubuntu-core/files).
+  #   xbc_desktop_name                      : 'wallpaper.jpg'                      # Name of the wallpaper.
+  #   xbc_desktop_theme                     : 'Arc'                                # Which theme you want to use.
+  #   xbc_desktop_icon_theme                : 'Numix-Circle'                       # Which icon theme you want to use.
+  #   xbc_desktop_font                      : 'Roboto 10'                          # Which font you want to use.
+  #   xbc_desktop_panel_position            : 'p=8;x=0;y=0'                        # Set panel/taskbar position.
+  #   xbc_desktop_panel_size                : '34'                                 # Set panel/taskbar height.
+  #   xbc_desktop_panel_bg_alpha            : '90'                                 # Set panel/taskbar transparancy level. 
+  #   xbc_desktop_8_digital_format          : '%H:%M'                              # Set panel/taskbar clock.
+  #   xbc_desktop_xfwm4_theme               : 'Arc'                                # Set theme on window manager.
+  #   xbc_desktop_xfwm4_title_font          : 'Roboto bold 9'                      # Set font on window manager.
+  #   xbc_desktop_xfwm4_borderless_maximize : 'false'                              # Whether to show a border on a window or not.
+  #   xbc_desktop_show_filesystem           : 'false'                              # Whether to show or hide filesystem on the desktop.
+  #   xbc_desktop_show_home                 : 'false'                              # Whether to show or hide homefolder on the desktop.
+  #   xbc_desktop_show_removable            : 'false'                              # Whether to show or hide removable storage on the desktop.
+  #   xbc_desktop_show_trash                : 'false'                              # Whether to show or hide the trashbin on the desktop.
+  #   xbc_desktop_icon_size                 : '49'                                 # Set desktop Iconsize.
+  #
+  # Files:
+  #   - files/wallpaper.png
+  #  
+  # Information:
+  #   - The Wallpaper Will be stored in the directory /opt/ansible/system/desktop/images
+  #   - Used xconf-query to push the settings.
+  #
+  xbc_desktop_state                     : 'enabled'
+  xbc_desktop_type                      : 'file'
+  xbc_desktop_url                       : 'https://example.org/wallpaper.jpg'
+  xbc_desktop_file                      : 'wallpaper.png'
+  xbc_desktop_name                      : 'wallpaper.jpg'
+
+  xbc_desktop_theme                     : 'Arc'
+  xbc_desktop_icon_theme                : 'Numix-Circle'
+  xbc_desktop_font                      : 'Roboto 10'  
  
   ## Settings for channel: xfce4-panel
-  xfconf_xfce4panel_position          : 'p=8;x=0;y=0'
-  xfconf_xfce4panel_size              : '34'
-  xfconf_xfce4panel_background_alpha  : '90'
-  xfconf_xfce4panel_8_digital_format  : '%H:%M'
+  xbc_desktop_panel_position            : 'p=8;x=0;y=0'
+  xbc_desktop_panel_size                : '34'
+  xbc_desktop_panel_bg_alpha            : '90'
+  xbc_desktop_8_digital_format          : '%H:%M'
 
-  ## Settings for channel: xfwm3
-  xfconf_xfwm4_theme                  : 'Arc'
-  xfconf_xfwm4_title_font             : 'Roboto bold 9'
-  xfconf_xfwm4_borderless_maximize    : 'false'
+  ## Settings for channel: xfwm4
+  xbc_desktop_xfwm4_theme               : 'Arc'
+  xbc_desktop_xfwm4_title_font          : 'Roboto bold 9'
+  xbc_desktop_xfwm4_borderless_maximize : 'false'
 
-  ## Settings for channel: xfce4-desktop (Put custom wallpaper in the files folder)
-  xfconf_xfce4desktop_image_name      : 'wallpaper.png'
-  xfconf_xfce4desktop_image_path      : '/opt/ansible/images/wallpaper.png'
-
-  xfconf_xfce4desktop_show_filesystem : 'false'
-  xfconf_xfce4desktop_show_home       : 'false'
-  xfconf_xfce4desktop_show_removable  : 'false'
-  xfconf_xfce4desktop_show_trash      : 'false'
-  xfconf_xfce4desktop_icon_size       : '49'
+  xbc_desktop_show_filesystem           : 'false'
+  xbc_desktop_show_home                 : 'false'
+  xbc_desktop_show_removable            : 'false'
+  xbc_desktop_show_trash                : 'false'
+  xbc_desktop_icon_size                 : '49'
 
 
+  # -- Login --
+  #
+  # Components:
+  #  LightDM
+  #
+  # Variable(s):
+  #   xbc_loginwp_state      : 'enabled' or 'disabled'                             # Wether run task or disable task.
+  #   xbc_loginwp_type       : 'url' or 'file'                                     # Where the wallpaper can be downloaded or copied from.
+  #   xbc_loginwp_url        : 'https://example.org/wallpaper.jpg'                 # Path where the wallpaper can be downloaded.
+  #   xbc_loginwp_file       : 'wallpaper.png'                                     # Path where the wallpaper can be copied from (ansible-role-xubuntu-core/files).
+  #   xbc_loginwp_name       : 'wallpaper.jpg'                                     # Name of the wallpaper.
+  #   xbc_login_theme        : 'Arc'                                               # Set LightDM theme.
+  #   xbc_icon_theme         : 'Numix-Circle'                                      # Set LightDM icon theme.
+  #   xbc_font_name          : 'Roboto'                                            # Set LightDM font name.
+  #   xbc_allow_guest        : 'false' or 'true'                                   # Disallow or Allow guest account.
+  #   xbc_greeter_hide_users : 'true' or 'false'                                   # Show user list or not
+  #
+  # Files:
+  #   - light-dm-gtk-greeter.conf.j2
+  #   - 60-autologin-lightdm.conf.j2
+  #  
+  # Information:
+  #   - Background images will be stored in the directory /opt/ansible/system/login/images/
+  #   - https://wiki.ubuntu.com/LightDM#Show_Manual_Login_Box
+  #
+  xbc_loginwp_state      : 'enabled'
+  xbc_loginwp_type       : 'file'
+  xbc_loginwp_url        : 'https://example.org/wallpaper.jpg'
+  xbc_loginwp_file       : 'wallpaper.png'
+  xbc_loginwp_name       : 'wallpaper.jpg'
+  xbc_login_theme        : 'Arc'
+  xbc_icon_theme         : 'Numix-Circle'
+  xbc_font_name          : 'Roboto'
+  xbc_allow_guest        : 'false'
+  xbc_greeter_hide_users : 'true'
 
-  # --- Whisker menu ---
 
-  whisker_button_icon                 : '/opt/ansible/images/ubuntu-black-start.png'
+  # --- Kiosk mode ---
+  #
+  # Variable(s):
+  #   xbc_kiosk_state                : 'enabled' or 'disabled'                     # Enable or Disable kiosk mode (eg. thinclient).
+  #   xbc_kiosk_user                 : 'autologin'                                 # User that can be used for autologin in kiosk mode.
+  #   xbc_kiosk_user_timeout         : '0'                                         # Set autologin in a period of time.
+  #   xbc_kiosk_power                : 'enabled' or 'disabled'	                   # Enable or Disable special powerplan for kiosk mode.
+  #   xbc_kiosk_logout_splash        : 'NONE' 
+  #   xbc_kiosk_logout_chooser       : 'NONE' 
+  #   xbc_kiosk_logout_logout        : 'ALL'
+  #   xbc_kiosk_logout_compatibility : 'NONE'
+  #   xbc_kiosk_logout_shutdown      : 'ALL'
+  #   xbc_kiosk_logout_security      : 'NONE'
+  #   xbc_kiosk_pwr_mgmt_custom      : 'enabled' or 'disabled'                     # Enable or Disable powermanagement for kiosk mode user.
+  #   xbc_kiosk_keyb_shortcuts       : 'enabled' or 'disabled'                     # Enable or Disable keyboard shortcuts for kiosk mode user (enable disabless keys). 
+  #   xbc_kiosk_tty_switch           : 'enabled' or 'disabled'                     # Enable or Disable TTY switching (enabled disabless switching).
+  #   xbc_kiosk_app_black            :                                             # block xubuntu-core builtin apps in startmenu (applist can be found on the following location /usr/share/applications/).
+  #     - app1
+  #     - app2
+  #   xbc_kiosk_app_unblocked        :                                             # Unblock xubunut-core builtin apps in startmenu (applist can be found on the following location /usr/share/applications/).
+  #     - app3
+  #     - app4
+  #
+  # Files:
+  #   xubuntu-core-kiosk.yml
+  #   xfce4-power-manager.xml.j2
+  #
+  # Resources:
+  #   - http://docs.xfce.org/xfce/xfce4-session/advanced#kiosk_mode
+  #
+  xbc_kiosk_state                : 'disabled'
+  xbc_kiosk_user                 : 'autologin'
+  xbc_kiosk_user_timeout         : '0'
+  xbc_kiosk_power                : 'enabled' 
+  xbc_kiosk_logout_splash        : 'NONE'
+  xbc_kiosk_logout_chooser       : 'NONE'
+  xbc_kiosk_logout_logout        : 'ALL'
+  xbc_kiosk_logout_compatibility : 'NONE'
+  xbc_kiosk_logout_shutdown      : 'ALL'
+  xbc_kiosk_logout_security      : 'NONE'
+  xbc_kiosk_pwr_mgmt_custom      : 'enabled'
+  xbc_kiosk_keyb_shortcuts       : 'enabled'
+  xbc_kiosk_tty_switch           : 'enabled'
 
+  # Blacklist
+  xbc_kiosk_applist_black :
+    - debian-uxterm.desktop
+    - debian-xterm.desktop
+    - exo-file-manager.desktop
+    - exo-mail-reader.desktop
+    - exo-preferred-applications.desktop
+    - exo-terminal-emulator.desktop
+    - exo-web-browser.desktop
+    - gcr-prompter.desktop
+    - gcr-viewer.desktop
+    - hplj1020.desktop
+    - mimeinfo.cache
+    - panel-desktop-handler.desktop
+    - panel-preferences.desktop
+    - python2.7.desktop
+    - software-properties-drivers.desktop
+    - software-properties-gtk.desktop
+    - Thunar.desktop
+    - Thunar-folder-handler.desktop
+    - thunar-settings.desktop
+    - thunar-volman-settings.desktop
+    - vim.desktop
+    - xfce4-about.desktop
+    - xfce4-appfinder.desktop
+    - xfce4-mime-settings.desktop
+    - xfce4-notifyd-config.desktop
+    - xfce4-run.desktop
+    - xfce4-screenshooter.desktop
+    - xfce4-settings-editor.desktop
+    - xfce4-terminal.desktop
+    - xfce-backdrop-settings.desktop
+    - xfce-keyboard-settings.desktop
+    - xfce-session-settings.desktop
+    - xfce-ui-settings.desktop
+    - xfce-wm-settings.desktop
+    - xfce-wmtweaks-settings.desktop
+    - xfce-workspaces-settings.desktop
+    - yelp.desktop
+    - gucharmap.desktop
+    - xfce-settings-manager.desktop
+    - byobu.desktop
+    - nm-connection-editor.desktop
 
-  
+  # Whitelist
+  xbc_kiosk_applist_white : 
+

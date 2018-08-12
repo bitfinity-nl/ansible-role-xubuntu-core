@@ -45,11 +45,11 @@
 #  transition-duration = overrides default value
 #
 [greeter]
-background={{ lightdm_background }}
+background=/opt/ansible/system/login/images/{{ xbc_loginwp_name }}
 #user-background=
-theme-name={{ lightdm_theme }}
-icon-theme-name={{ lightdm_icon_theme_name }}
-font-name={{ lightdm_font_name }}
+theme-name={{ xbc_login_theme }}
+icon-theme-name={{ xbc_icon_theme }}
+font-name={{ xbc_font_name }}
 #xft-antialias=
 #xft-dpi=
 #xft-hintstyle=
