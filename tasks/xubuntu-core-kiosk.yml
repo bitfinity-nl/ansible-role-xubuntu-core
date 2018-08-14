@@ -121,7 +121,45 @@
       owner: root
       group: root
       mode: 0755
-    
+
+  - name: "Set permissions to lock the computer"
+    file:
+      path: /usr/bin/xflock4
+      owner: root
+      group: root
+      mode: 0751
+    when:
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_lock_device == 'disabled' or
+        xbc_kiosk_state == 'disabled' and xbc_kiosk_lock_device == 'disabled'
+  
+  - name: "Remove permissions to lock the computer"
+    file:
+      path: /usr/bin/xflock4
+      owner: root
+      group: root
+      mode: 0750
+    when:
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_lock_device == 'disabled' or
+        xbc_kiosk_state == 'disabled' and xbc_kiosk_lock_device == 'disabled'
+
+  - name: "Disable xfce4-terminal in rightclick menu for kiosk user."
+    file:
+      path: /usr/bin/xfce4-terminal
+      owner: root
+      group: root
+      mode: 0750
+    when:
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_block_xfce4_terminal == 'enabled'
+
+  - name: "Enable xfce4-terminal in rightclick menu for kiosk user."
+    file:
+      path: /usr/bin/xfce4-
+      owner: root
+      group: root
+      mode: 0751
+    when:
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_block_xfce4_terminal == 'disabled'
+
   - name: "Unblock builtin xubuntu-core applist for allusers" 
     file:
       path: "/usr/share/applications/{{ item }}"
@@ -141,3 +179,4 @@
     with_items: "{{ xbc_kiosk_applist_black }}"
     when:
       - xbc_kiosk_state == 'disabled'
+

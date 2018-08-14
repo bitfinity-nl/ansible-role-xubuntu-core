@@ -8,11 +8,11 @@
   # Description:
   #   Providing a standerdized minimal-desktop based on xubuntu
 
-  - name: "For OS: Ubuntu 16.04LTS, Arch: amd64"
-    import_tasks: ubuntu-1604-amd64.yml
-    when:
-      - ansible_distribution_version == "16.04"
-      - ansible_architecture == "x86_64"
+#  - name: "For OS: Ubuntu 16.04LTS, Arch: amd64"
+#    import_tasks: ubuntu-1604-amd64.yml
+#    when:
+#      - ansible_distribution_version == "16.04"
+#      - ansible_architecture == "x86_64"
 
   - name: "For OS: Ubuntu 18.04LTS, Arch: amd64"
     import_tasks: ubuntu-1804-amd64.yml

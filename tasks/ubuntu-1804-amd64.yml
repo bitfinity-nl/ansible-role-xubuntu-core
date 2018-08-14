@@ -109,3 +109,9 @@
       - { src: custom-desktop.desktop, dest: /etc/xdg/autostart/custom-desktop.desktop }      
       - { src: kioskrc.j2, dest: /etc/xdg/xfce4/kiosk/kioskrc }
 
+  - name: "Fix: reconfigure nsswitch to look for hosts file and then in configured DNS to resolve hostnames in domain"
+    lineinfile:
+      path: /etc/nsswitch.conf
+      regexp: "hosts:          files mdns4_minimal"
+      line: 'hosts:          files dns'
+      backup: yes
