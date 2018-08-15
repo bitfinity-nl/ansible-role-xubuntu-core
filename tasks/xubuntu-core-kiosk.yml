@@ -129,8 +129,8 @@
       group: root
       mode: 0751
     when:
-      - xbc_kiosk_state == 'enabled' and xbc_kiosk_lock_device == 'disabled' or
-        xbc_kiosk_state == 'disabled' and xbc_kiosk_lock_device == 'disabled'
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_enable_lock == 'enabled' or
+        xbc_kiosk_state == 'disabled' and xbc_kiosk_enable_lock == 'disabled'
   
   - name: "Remove permissions to lock the computer"
     file:
@@ -139,26 +139,54 @@
       group: root
       mode: 0750
     when:
-      - xbc_kiosk_state == 'enabled' and xbc_kiosk_lock_device == 'disabled' or
-        xbc_kiosk_state == 'disabled' and xbc_kiosk_lock_device == 'disabled'
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_enable_lock == 'disabled' or
+        xbc_kiosk_state == 'disabled' and xbc_kiosk_enable_device == 'disabled'
 
-  - name: "Disable xfce4-terminal in rightclick menu for kiosk user."
+  - name: "Disable terminal access for kiosk user. (including rightclick menu)"
     file:
-      path: /usr/bin/xfce4-terminal
+      path: "{{ item }}"
       owner: root
       group: root
       mode: 0750
+    with_items:
+     - /usr/bin/xfce4-terminal
+     - /usr/bin/xterm
     when:
-      - xbc_kiosk_state == 'enabled' and xbc_kiosk_block_xfce4_terminal == 'enabled'
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_block_terminal == 'enabled'
 
-  - name: "Enable xfce4-terminal in rightclick menu for kiosk user."
+  - name: "Enable terminal access for kiosk user. (including rightclick menu)"
     file:
-      path: /usr/bin/xfce4-
+      path: "{{ item }}"
       owner: root
       group: root
       mode: 0751
+    with_items:
+      - /usr/bin/xfce4-terminal
+      - /usr/bin/xterm
     when:
-      - xbc_kiosk_state == 'enabled' and xbc_kiosk_block_xfce4_terminal == 'disabled'
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_block_terminal == 'disabled'
+
+  - name: "Disable thunar (filemanager) access for kiosk user. (including rightclick menu)"
+    file:
+      path: "{{ item }}"
+      owner: root
+      group: root
+      mode: 0750
+    with_items:
+     - /usr/bin/thunar
+    when:
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_block_thunar == 'enabled'
+
+  - name: "Enable thunar access for kiosk user. (including rightclick menu)"
+    file:
+      path: "{{ item }}"
+      owner: root
+      group: root
+      mode: 0751
+    with_items:
+      - /usr/bin/thunar
+    when:
+      - xbc_kiosk_state == 'enabled' and xbc_kiosk_block_thunar == 'disabled'
 
   - name: "Unblock builtin xubuntu-core applist for allusers" 
     file:

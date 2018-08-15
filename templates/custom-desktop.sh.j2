@@ -31,3 +31,7 @@ xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home -s '{{ xbc_
 xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable -s '{{ xbc_desktop_show_removable | lower }}'
 xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash -s '{{ xbc_desktop_show_trash | lower }}'
 xfconf-query -c xfce4-desktop -p /desktop-icons/icon-size -s '{{ xbc_desktop_icon_size | lower }}'
+
+## Settings for channel: xfce4-session (hide Suspend/Hibernate)
+xfconf-query -c xfce4-session -np '/shutdown/ShowSuspend' -t 'bool' -s '{{ xbc_kiosk_show_suspend | lower }}'
+xfconf-query -c xfce4-session -np '/shutdown/ShowHibernate' -t 'bool' -s '{{ xbc_kiosk_show_hibernate | lower }}'

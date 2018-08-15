@@ -175,12 +175,18 @@
   #   xbc_kiosk_pwr_mgmt_custom      : 'enabled' or 'disabled'                     # Enable or Disable powermanagement for kiosk mode user.
   #   xbc_kiosk_keyb_shortcuts       : 'enabled' or 'disabled'                     # Enable or Disable keyboard shortcuts for kiosk mode user (enable disabless keys). 
   #   xbc_kiosk_tty_switch           : 'enabled' or 'disabled'                     # Enable or Disable TTY switching (enabled disabless switching).
-  #   xbc_kiosk_app_black            :                                             # block xubuntu-core builtin apps in startmenu (applist can be found on the following location /usr/share/applications/).
+  #   xbc_kiosk_enable_lock_         : 'enabled' or 'disabled'                     # Whether users can lock the device.
+  #   xbc_kiosk_show_suspend         : 'true' or 'false'                           # Enable or Disable suspend button in whisker logout menu.
+  #   xbc_kiosk_show_hibernate       : 'true' or 'false'                           # Enable or Disable hibernate button in whisker logout menu (for allusers or kiosk user).
+  #   xbc_kiosk_block_terminal       : 'enabled' or 'disabled'                     # Enable or Disable terminal access for kiosk user (also rightclick menu).
+  #   xbc_kiosk_block_thunar         : 'enabled' or 'disabled'                     # Enable or Disable thunar (filemanager) access for kiosk user (also rightclick menu) Warning !! Desktop shortcuts will not run.
+  #   xbc_kiosk_app_black            :                                             # block xubuntu-core builtin apps in (whisker) startmenu (applist can be found on the following location /usr/share/applications/).
   #     - app1
   #     - app2
-  #   xbc_kiosk_app_unblocked        :                                             # Unblock xubunut-core builtin apps in startmenu (applist can be found on the following location /usr/share/applications/).
+  #   xbc_kiosk_app_unblocked        :                                             # Unblock xubunut-core builtin apps in (whisker) startmenu (applist can be found on the following location /usr/share/applications/).
   #     - app3
   #     - app4
+  #
   #
   # Files:
   #   xubuntu-core-kiosk.yml
@@ -195,13 +201,18 @@
   xbc_kiosk_power                : 'enabled' 
   xbc_kiosk_logout_splash        : 'NONE'
   xbc_kiosk_logout_chooser       : 'NONE'
-  xbc_kiosk_logout_logout        : 'ALL'
+  xbc_kiosk_logout_logout        : 'NONE'
   xbc_kiosk_logout_compatibility : 'NONE'
   xbc_kiosk_logout_shutdown      : 'ALL'
   xbc_kiosk_logout_security      : 'NONE'
   xbc_kiosk_pwr_mgmt_custom      : 'enabled'
   xbc_kiosk_keyb_shortcuts       : 'enabled'
   xbc_kiosk_tty_switch           : 'enabled'
+  xbc_kiosk_enable_lock          : 'disabled'
+  xbc_kiosk_show_suspend         : 'false'
+  xbc_kiosk_show_hibernate       : 'false'
+  xbc_kiosk_block_terminal       : 'enabled'
+  xbc_kiosk_block_thunar         : 'disabled'
 
   # Blacklist
   xbc_kiosk_applist_black :
