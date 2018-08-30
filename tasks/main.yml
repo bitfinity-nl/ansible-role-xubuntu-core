@@ -20,6 +20,12 @@
       - ansible_distribution_version == "18.04"
       - ansible_architecture == "x86_64"
 
+  - name: "Import xubuntu-core-networkmanager template (change to xubuntu networkmanager)"
+    import_tasks: xubuntu-core-networkmanager.yml
+    when:
+      - ansible_distribution_version == "18.04"
+      - ansible_architecture == "x86_64"
+
   - name: "Import kioskmode template (Autologin)"
     import_tasks: xubuntu-core-kiosk.yml
     when:

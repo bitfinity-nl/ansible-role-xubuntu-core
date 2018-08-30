@@ -159,6 +159,14 @@
   xbc_greeter_hide_users : 'true'
 
 
+  # -- XFCE network manager --
+  #
+  # Variable(s):
+  #   xbc_network_manager_state: 'disabled' or 'enabled'    # Use xfce networkmanager to handle all networkwork connections instead of server configuration.(Default = disabled)
+  #    
+  xbc_network_manager_state: 'disabled'
+
+
   # --- Kiosk mode ---
   #
   # Variable(s):
