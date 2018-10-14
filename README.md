@@ -24,6 +24,8 @@ Requirements
 * Ubuntu server 18.04
 * Ansible control server
 
+* administrator account with sudo rights needed.
+
 
 Role Variables
 --------------
