@@ -219,12 +219,12 @@
   xbc_kiosk_enable_lock          : 'disabled'
   xbc_kiosk_show_suspend         : 'false'
   xbc_kiosk_show_hibernate       : 'false'
-  xbc_kiosk_block_terminal       : 'enabled'
+  xbc_kiosk_block_terminal       : 'disabled'
   xbc_kiosk_block_thunar         : 'disabled'
 
   # Blacklist
   xbc_kiosk_applist_black :
-#    - debian-uxterm.desktop
+    - debian-uxterm.desktop
     - debian-xterm.desktop
     - exo-file-manager.desktop
     - exo-mail-reader.desktop
@@ -268,6 +268,7 @@
 
   # Whitelist
   xbc_kiosk_applist_white :
-    - debian-uxterm.desktop
+#    - xfce4-terminal.desktop
+#    - debian-xterm.desktop
 
 
