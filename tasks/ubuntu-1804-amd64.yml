@@ -10,7 +10,7 @@
 
   - name: "Add repositories"
     apt_repository:
-      repo: "{{ items }}"
+      repo: "{{ item }}"
       state: present
       update_cache: yes
     with_items:
