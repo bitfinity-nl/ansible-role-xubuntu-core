@@ -32,7 +32,7 @@
   xbc_splash_state       : 'enabled'
   xbc_splash_type        : 'file'
   xbc_splash_image_url   : 'https://raw.githubusercontent.com/bitfinity-nl/ansible-role-xubuntu-core/master/files/plymouth-bitfinityos.png'  
-  xbc_splash_image_file  : 'wallpaper.png' 
+  xbc_splash_image_file  : 'plymouth-bitfinityos.png' 
 
 
   # -- Startbutton --
