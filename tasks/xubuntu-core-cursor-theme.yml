@@ -8,7 +8,7 @@
   #   Use custom cursor theme.
   #
   # Variable(s)
-  #   xbc_cursor_state: 'enabled' or Â'disabled'     # Whether use default or custom cursor
+  #   xbc_cursor_state: 'enabled' or 'disabled'     # Whether use default or custom cursor
   #   xbc_cursor_name:
 
 

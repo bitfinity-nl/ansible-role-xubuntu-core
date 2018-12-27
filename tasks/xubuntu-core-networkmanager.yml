@@ -78,9 +78,10 @@
 
   - name: "Remove packages"
     apt:
-      name: "{{ item }}"
+      name: "{{ packages }}"
       state: absent
-    with_items:
+    vars:
+      packages:
       - network-manager
       - network-manager-gnome
     when:
