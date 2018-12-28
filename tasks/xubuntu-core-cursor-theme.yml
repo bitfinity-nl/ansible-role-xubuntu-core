@@ -7,22 +7,8 @@
   # Description:
   #   Use custom cursor theme.
   #
-  # Variable(s)
-  #   xbc_cursor_state: 'enabled' or 'disabled'     # Whether use default or custom cursor
-  #   xbc_cursor_name:
-  #
-  # Source(s)
-  #   - https://www.xfce-look.org/p/1084938/
-
-  - name: "Transfer cursor"
-    copy:
-      src: cursor/175797-Win-8.1-NS-S.tar.bz2
-      dest: /tmp/cursor.tar.bz2
 
   - name: "Unarchive mouse cursor"
     unarchive:
-      src: /tmp/175797-Win-8.1-NS-S.tar.bz2
-      dest: /usr/share/icons/
-      owner: root
-      group: root
-      mode: 0755
+      src: "cursor/{{ xbc_cursor_filename }}"
+      dest: /usr/share/icons

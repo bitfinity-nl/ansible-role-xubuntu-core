@@ -122,6 +122,24 @@
   xbc_desktop_icon_size                 : '49'
 
 
+  # -- Cursor --
+  #
+  # Variable(s):
+  #   xbc_cursor_state       : 'enabled' or 'disabled'                             # Wether run task or disable task.
+  #   xbc_cursor_theme_name  : 'Win-8.1-S'                                         # Name of the cursor theme.
+  #   xbc_cursor_size        : '24'                                                # Set the size of the cursor.
+  #   xbc_cursor_filename    : 'http://example.net/cursor/theme.tar.gz'            # Can be an url or in the file directory from the role.
+  #
+  # Information:
+  #   - Repack icon theme like the default theme, otherwise it won work. 
+  #   - Cursor wil be deployed via loginscript, re-login to see effect.
+  #   - Cursor that I used: https://www.xfce-look.org/p/1084938/
+  #
+  xbc_cursor_state      : 'enabled'
+  xbc_cursor_theme_name : 'Win-8.1-S'
+  xbc_cursor_size       : '24'
+  xbc_cursor_filename   : 'Win-8.1-S.tar.gz'
+
   # -- Login --
   #
   # Components:
