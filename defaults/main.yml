@@ -180,9 +180,18 @@
   # -- XFCE network manager --
   #
   # Variable(s):
-  #   xbc_network_manager_state: 'disabled' or 'enabled'    # Use xfce networkmanager to handle all networkwork connections instead of server configuration.(Default = disabled)
+  #   xbc_network_manager_state : 'disabled' or 'enabled'    # Use xfce networkmanager to handle all networkwork connections instead of server configuration.(Default = disabled)
   #    
-  xbc_network_manager_state: 'enabled'
+  xbc_network_manager_state : 'enabled'
+
+
+
+  # -- XFCE network manager --
+  #
+  # Variable(s):
+  #   xbc_bluetooth_state : 'enabled' or 'enabled'    # enable or disable bluetooth support (Default = enabled). 
+  #
+  xbc_bluetooth_state : 'enabled'
 
 
   # --- Kiosk mode ---

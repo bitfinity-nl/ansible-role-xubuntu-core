@@ -26,6 +26,12 @@
       - ansible_distribution_version == "18.04"
       - ansible_architecture == "x86_64"
 
+  - name: "Import xubuntu-core-bluetooth.yml"
+    import_tasks: xubuntu-core-bluetooth.yml
+    when:
+      - ansible_distribution_version == "18.04"
+      - ansible_architecture == "x86_64"
+
   - name: "Import cursor theme"
     import_tasks: xubuntu-core-cursor-theme.yml
     when:

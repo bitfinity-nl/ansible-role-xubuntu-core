@@ -1,0 +1,37 @@
+---
+  # Title: xubuntu-core-bluetooth.yml
+  #
+  # Author: Luc Rutten
+  # Version: 1.0
+  # File: tasks/xubuntu-core-bluetooth.yml
+  #
+  # Description:
+  #   Enable bluetooth
+
+  - name: "Install packages"
+    apt:
+      name: "{{ packages }}"
+      state: present
+    vars:
+      packages:
+      - bluetooth
+      - bluez
+      - bluez-tools
+      - rfkill
+      - blueman
+    when:
+      - xbc_bluetooth_state == 'enabled'
+
+  - name: "Remove packages"
+    apt:
+      name: "{{ packages }}"
+      state: absent
+    vars:
+      packages:
+      - bluetooth
+      - bluez
+      - bluez-tools
+      - rfkill
+      - blueman
+    when:
+      - xbc_bluetooth_state == 'disabled'
