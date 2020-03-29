@@ -21,16 +21,16 @@
       src: xubuntu-core-splash.plymouth.j2
       dest: /usr/share/plymouth/themes/xubuntu-core-splash/xubuntu-core-splash.plymouth
       owner: root
-      group: administrator
-      mode: 0754
+      group: root
+      mode: 0755
 
   - name: "import template file with script"
     template:
       src: xubuntu-core-splash.script.j2
       dest: /usr/share/plymouth/themes/xubuntu-core-splash/xubuntu-core-splash.script
       owner: root
-      group: administrator
-      mode: 0754
+      group: root
+      mode: 0755
 
   - name: "configure xubuntu-core-splash logo (url)"
     get_url:
