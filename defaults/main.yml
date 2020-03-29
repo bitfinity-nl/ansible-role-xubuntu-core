@@ -56,8 +56,8 @@
   xbc_startbutton_state   : 'enabled'
   xbc_startbutton_type    : 'file'
   xbc_startbutton_url     : ''
-  xbc_startbutton_file    : 'ubuntu-black-start.png'
-  xbc_startbutton_name    : 'ubuntu-black-start.png'
+  xbc_startbutton_file    : 'bitfinity_38x38.png'
+  xbc_startbutton_name    : 'bitfinity_38x38.png'
 
 
   # -- Desktop  --
