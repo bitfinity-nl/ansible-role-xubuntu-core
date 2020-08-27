@@ -30,7 +30,7 @@ Requirements
 Role Variables
 --------------
 
-To many options to describe here, please look at
+To many options to describe here, please look at  
 the " default/main.yml" for all options and documentation.
 
 Dependencies
@@ -79,6 +79,5 @@ GPLv3
 Author Information
 ------------------
 
-E: lrutten@bitfinity.nl
-
+E: lrutten@bitfinity.nl  
 I: https://www.bitfinity.nl
