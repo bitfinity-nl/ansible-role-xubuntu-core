@@ -86,7 +86,7 @@
   #   xbc_desktop_show_removable            : 'false'                              # Whether to show or hide removable storage on the desktop.
   #   xbc_desktop_show_trash                : 'false'                              # Whether to show or hide the trashbin on the desktop.
   #   xbc_desktop_icon_size                 : '49'                                 # Set desktop Iconsize.
-  #
+  #   xbc_desktop_xfwm4_image_style         : '0'                                  # image-style [0 to 5] : None, centered, tiled, Stretced, Zoomed, spanning
   # Files:
   #   - files/wallpaper.png
   #  
@@ -99,6 +99,7 @@
   xbc_desktop_url                       : 'https://example.org/wallpaper.jpg'
   xbc_desktop_file                      : 'wallpaper-bitfinityos.png'
   xbc_desktop_name                      : 'wallpaper-bitfinityos.png'
+  xbc_desktop_xfwm4_image_style         : '0'
 
   xbc_desktop_theme                     : 'Arc'
   xbc_desktop_icon_theme                : 'Numix-Circle'
