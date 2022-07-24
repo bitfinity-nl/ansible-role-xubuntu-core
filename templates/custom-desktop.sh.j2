@@ -25,6 +25,8 @@ xfconf-query -c xfwm4 -p /general/borderless_maximize -s '{{ xbc_desktop_xfwm4_b
 xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-path -s '/opt/ansible/system/desktop/images/{{ xbc_desktop_name }}'
 xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s '/opt/ansible/system/desktop/images/{{ xbc_desktop_name }}'
 xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor1/image-path -s '/opt/ansible/system/desktop/images/{{ xbc_desktop_name }}'
+xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-style -s '{{ xbc_desktop_xfwm4_image_style }}'
+
 
 xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-filesystem -s '{{ xbc_desktop_show_filesystem | lower }}'
 xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home -s '{{ xbc_desktop_show_home | lower }}'
